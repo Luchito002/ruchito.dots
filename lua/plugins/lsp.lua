@@ -44,22 +44,37 @@ return {
       settings = {
         Lua = {
           telemetry = { enable = false },
-          workspace = { checkThirdParty = false }
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false
+          }
         }
       }
     })
     require("lspconfig").csharp_ls.setup({
       on_attach = on_attach,
+      capabilities = capabilities
+    })
+    require("lspconfig").eslint.setup({
+      on_attach = on_attach,
+      capabilities = capabilities
     })
     require("lspconfig").tsserver.setup({
       on_attach = on_attach,
       capabilities = capabilities
     })
+    require('lspconfig').custom_elements_ls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities
+    })
     require("lspconfig").biome.setup({
       on_attach = on_attach,
+      capabilities = capabilities
     })
     require("lspconfig").tailwindcss.setup({
       on_attach = on_attach,
+      capabilities = capabilities
     })
   end
 }
