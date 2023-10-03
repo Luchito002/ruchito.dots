@@ -5,16 +5,13 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'auto',
+        theme = 'tokyonight',
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        disabled_filetypes = {
-          statusline = {},
-          winbar = {},
-        },
+        disabled_filetypes = {},
         ignore_focus = {},
         always_divide_middle = true,
-        globalstatus = false,
+        globalstatus = true,
         refresh = {
           statusline = 1000,
           tabline = 1000,
@@ -22,25 +19,31 @@ return {
         }
       },
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
-        lualine_x = { 'encoding', '', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' }
+        lualine_a = { { "mode", upper = true } },
+        lualine_b = { { "branch", icon = "" }, "db_ui#statusline" },
+        lualine_c = { { "filename", file_status = true, path = 1 } },
+        lualine_x = {
+          "diagnostics",
+          "diff",
+          {
+            require("noice").api.status.mode.get,
+            cond = require("noice").api.status.mode.has,
+            color = { fg = "#ff9e64" },
+          },
+          {
+            require("lazy.status").updates,
+            cond = require("lazy.status").has_updates,
+            color = { fg = "ff9e64" },
+          },
+        },
+        lualine_y = { "filetype" },
+        lualine_z = { "location" },
       },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { 'filename' },
-        lualine_x = { 'location' },
-        lualine_y = {},
-        lualine_z = {}
-      },
+      inactive_sections = {},
       tabline = {},
       winbar = {},
       inactive_winbar = {},
-      extensions = {}
+      extensions = { "quickfix", "fugitive" }
     }
   end,
 }

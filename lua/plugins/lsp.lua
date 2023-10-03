@@ -14,7 +14,6 @@ return {
     local on_attach = function(_, bufnr)
       vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
-
       local opts = { buffer = bufnr }
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -34,7 +33,6 @@ return {
         vim.lsp.buf.format { async = true }
       end, opts)
     end
-
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
     require("neodev").setup()
