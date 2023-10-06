@@ -11,6 +11,7 @@ return {
       "lua",
       "luadoc",
       "tsx",
+      "javascript",
       "typescript",
       "html"
     },
