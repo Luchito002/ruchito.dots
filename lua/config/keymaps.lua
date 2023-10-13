@@ -32,8 +32,13 @@ keymap.set('', 'sj', '<C-w>j')
 keymap.set('', 'sl', '<C-w>l')
 
 -- Resize window
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
+keymap.set('n', 'rl', '<C-w><')
+keymap.set('n', 'rh', '<C-w>>')
+keymap.set('n', 'rj', '<C-w>+')
+keymap.set('n', 'rk', '<C-w>-')
+
+-- :Explore like nerd tree
+keymap.set('i', '<C-b>', '<Esc>:Lex<CR>:vertical resize 30<CR>', { noremap = true, silent = true })
+keymap.set('n', '<C-b>', ':Lex<CR>:vertical resize 30<CR>', { noremap = true, silent = true })
+
 
