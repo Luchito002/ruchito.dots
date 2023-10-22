@@ -1,18 +1,77 @@
 return {
-	"nvim-telescope/telescope.nvim",
-	dependencies = {
+  "nvim-telescope/telescope.nvim",
+  dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-lua/popup.nvim" },
-    { "nvim-telescope/telescope-fzy-native.nvim" },
     { "kyazdani42/nvim-web-devicons" },
     { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-telescope/telescope-ui-select.nvim" },
-	},
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build =
+      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+    }
+  },
   event = "VeryLazy",
+
+  opts = {
+    extensions = {
+      fzf = {
+        fuzzy = true,                   -- false will only do exact matching
+        override_generic_sorter = true, -- override the generic sorter
+        override_file_sorter = true,    -- override the file sorter
+        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+        -- the default case_mode is "smart_case"
+      },
+    }
+  },
+  config = function(opts)
+    require('telescope').setup(opts)
+  end,
+
   keys = {
     { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-    { "<leader>g", "<cmd>Telescope git_branches<cr>", desc = "Git Branches selector" },
-    { "<leader>c", "<cmd>Telescope git_commits<cr>", desc = "Git commits" },
-    { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Open Buffers" },
+    { "<leader>b",        "<cmd>Telescope buffers<cr>",    desc = "Open Buffers" },
+    { "<leader>h",        "<cmd>Telescope help_tags<cr>",  desc = "Open Help tags" },
+    { "<leader>c", "<cmd>Telescope colorscheme<cr>",   desc = "Select colorscheme" },
+    {
+      "<leader>e",
+      function()
+        require('telescope').extensions.file_browser.file_browser({ path = "%:h:p", select_buffer = true })
+      end,
+      desc = "Open file browser"
+    },
+
+    -- git
+    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Git Branches selector" },
+    { "<leader>gc", "<cmd>Telescope git_commits<cr>",  desc = "Git commits" },
+    { "<leader>gp", "<cmd>Telescope git_bcommits<cr>", desc = "Git commits buffer" },
+    { "<leader>gs", "<cmd>Telescope git_status<cr>",   desc = "Git Status" },
+    {
+      "<leader>gu",
+      function()
+        require('telescope.builtin').git_files({ show_untracked = true })
+      end,
+      desc = "Git Files selector"
+    },
+    {
+      "<leader>rp",
+      function()
+        require("telescope.builtin").find_files({
+          prompt_title = "Plugins",
+          cwd = "~/.config/nvim/lua/plugins",
+          attach_mappings = function(_, map)
+            local actions = require("telescope.actions")
+            local action_state = require("telescope.actions.state")
+            map("i", "<c-y>", function(prompt_bufnr)
+              local new_plugin = action_state.get_current_line()
+              actions.close(prompt_bufnr)
+              vim.cmd(string.format("edit ~/.config/nvim/lua/plugins/%s.lua", new_plugin))
+            end)
+            return true
+          end
+        })
+      end
+    },
   }
 }

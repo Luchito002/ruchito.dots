@@ -13,7 +13,8 @@ return {
       "tsx",
       "javascript",
       "typescript",
-      "html"
+      "html",
+      "python"
     },
 
     --Modules
