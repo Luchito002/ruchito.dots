@@ -41,4 +41,6 @@ keymap.set('n', 'rk', '<C-w>-')
 keymap.set('i', '<C-b>', '<Esc>:Lex<CR>:vertical resize 30<CR>', { noremap = true, silent = true })
 keymap.set('n', '<C-b>', ':Lex<CR>:vertical resize 30<CR>', { noremap = true, silent = true })
 
-
+-- Result
+vim.keymap.set('n', 'n', 'nzzzv', { desc = "Goes to the next result on the search and put the cursor in the middle" })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = "Goes to the prev result on the search and put the cursor in the middle" })
