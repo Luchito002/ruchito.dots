@@ -8,13 +8,22 @@ return {
     { "nvim-telescope/telescope-ui-select.nvim" },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      build =
-      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-    }
+      build = 'make'
+    },
   },
   event = "VeryLazy",
 
   opts = {
+    defaults = {
+      layout_strategy = "horizontal",
+      layout_config = {
+        horizontal = {
+          prompt_position = "top",
+        },
+      },
+      sorting_strategy = "ascending",
+    },
+
     extensions = {
       fzf = {
         fuzzy = true,                   -- false will only do exact matching
@@ -26,14 +35,18 @@ return {
     }
   },
   config = function(opts)
+    vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#27a1b9" })
+    vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#27a1b9" })
+
     require('telescope').setup(opts)
+    require('telescope').load_extension('fzf')
   end,
 
   keys = {
-    { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-    { "<leader>b",        "<cmd>Telescope buffers<cr>",    desc = "Open Buffers" },
-    { "<leader>h",        "<cmd>Telescope help_tags<cr>",  desc = "Open Help tags" },
-    { "<leader>c", "<cmd>Telescope colorscheme<cr>",   desc = "Select colorscheme" },
+    { "<leader><leader>", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
+    { "<leader>b",        "<cmd>Telescope buffers<cr>",     desc = "Open Buffers" },
+    { "<leader>h",        "<cmd>Telescope help_tags<cr>",   desc = "Open Help tags" },
+    { "<leader>c",        "<cmd>Telescope colorscheme<cr>", desc = "Select colorscheme" },
     {
       "<leader>e",
       function()

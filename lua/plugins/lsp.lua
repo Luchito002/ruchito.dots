@@ -4,7 +4,6 @@ return {
     "williamboman/mason.nvim",
     "folke/neodev.nvim",
   },
-
   config = function()
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -13,7 +12,7 @@ return {
 
     local on_attach = function(_, bufnr)
       vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
+
       local opts = { buffer = bufnr }
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -38,15 +37,10 @@ return {
     require("neodev").setup()
     require("lspconfig").lua_ls.setup({
       on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
+      setting = {
         Lua = {
           telemetry = { enable = false },
-          workspace = {
-            -- Make the server aware of Neovim runtime files
-            library = vim.api.nvim_get_runtime_file("", true),
-            checkThirdParty = false
-          }
+          workspace = { chechThirdParty = false }
         }
       }
     })
@@ -81,6 +75,17 @@ return {
     require("lspconfig").pyright.setup({
       on_attach = on_attach,
       capabilities = capabilities
+    })
+    require("lspconfig").jdtls.setup({
+      on_attach = on_attach,
+      -- remove annoying messages
+      handlers = {
+        ['language/status'] = function(_, result)
+          vim.print('***')
+        end,
+        ['$/progress'] = function(_, result, ctx)
+        end,
+      },
     })
   end
 }
