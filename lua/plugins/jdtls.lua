@@ -1,5 +1,6 @@
 return {
   "mfussenegger/nvim-jdtls",
+  lazy = true,
   config = function()
     local has = function(x)
       return vim.fn.has(x) == 1

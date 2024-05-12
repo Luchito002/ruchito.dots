@@ -37,6 +37,7 @@ return {
   config = function(opts)
     vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#27a1b9" })
     vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#27a1b9" })
+    vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 
     require('telescope').setup(opts)
     require('telescope').load_extension('fzf')
@@ -66,6 +67,15 @@ return {
         require('telescope.builtin').git_files({ show_untracked = true })
       end,
       desc = "Git Files selector"
+    },
+
+    -- etc
+    {
+      "<leader>f",
+      function()
+        require('telescope.builtin').find_files({hidden=true})
+      end,
+      desc = "Find hidden files"
     },
     {
       "<leader>rp",
