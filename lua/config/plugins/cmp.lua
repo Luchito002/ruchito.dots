@@ -7,6 +7,74 @@ local M = {}
 
 function M.setup()
   cmp.setup({
+
+    window = {
+      completion = {
+        border = "rounded",
+        scrollbar = false,
+      },
+
+      documentation = {
+        border = "rounded",
+      },
+    },
+
+    formatting = {
+      format = function(entry, vim_item)
+        local KIND_ICONS = {
+          Tailwind = '󰝤󰝤󰝤󰝤󰝤󰝤',
+          Color = '色',
+          Class = ' クラス',
+          Constant = ' 定数',
+          Constructor = ' コンストラクタ',
+          Enum = ' 列挙型',
+          EnumMember = ' 列挙メンバ',
+          Event = ' イベント',
+          Field = ' フィールド',
+          File = ' ファイル',
+          Folder = ' フォルダ',
+          Function = '󰡱 関数',
+          Interface = ' インタフェース',
+          Keyword = ' キーワード',
+          Method = ' メソッド',
+          Module = ' モジュール',
+          Operator = ' 演算子',
+          Property = ' プロパティ',
+          Reference = ' 参照',
+          Snippet = " スニペット",
+          Struct = ' 構造体',
+          Text = '󰦨 テキスト',
+          TypeParameter = '型 パラメータ',
+          Unit = '󰕤 ユニット',
+          Value = '󱢏 値',
+          Variable = ' 変数'
+        }
+        if vim_item.kind == 'Color' and entry.completion_item.documentation then
+          local _, _, r, g, b =
+          ---@diagnostic disable-next-line: param-type-mismatch
+              string.find(entry.completion_item.documentation, '^rgb%((%d+), (%d+), (%d+)')
+
+          if r and g and b then
+            local color = string.format('%02x', r) .. string.format('%02x', g) .. string.format('%02x', b)
+            local group = 'Tw_' .. color
+
+            if vim.api.nvim_call_function('hlID', { group }) < 1 then
+              vim.api.nvim_command('highlight' .. ' ' .. group .. ' ' .. 'guifg=#' .. color)
+            end
+
+            vim_item.kind = KIND_ICONS.Tailwind
+            vim_item.kind_hl_group = group
+
+            return vim_item
+          end
+        end
+
+        vim_item.kind = KIND_ICONS[vim_item.kind] or vim_item.kind
+
+        return vim_item
+      end,
+    },
+
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
@@ -68,7 +136,6 @@ function M.setup()
       { name = 'cmdline' }
     })
   })
-
 end
 
 return M
