@@ -8,15 +8,17 @@ return {
   main = "nvim-treesitter.configs",
   opts = {
     ensure_installed = {
-      --"lua",
-      --"luadoc",
+      "lua",
+      "luadoc",
       "tsx",
       "javascript",
       "typescript",
       "html",
       "python",
       "c_sharp",
-      "java"
+      "java",
+      "properties",
+      "dart"
     },
 
     --Modules
