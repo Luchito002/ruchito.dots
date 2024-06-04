@@ -72,10 +72,14 @@ return {
       on_attach = on_attach,
       capabilities = capabilities
     })
+
+    -- For python
     require("lspconfig").pyright.setup({
       on_attach = on_attach,
       capabilities = capabilities
     })
+
+    -- For java
     require("lspconfig").jdtls.setup({
       on_attach = on_attach,
       -- remove annoying messages
