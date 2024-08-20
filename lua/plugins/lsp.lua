@@ -85,7 +85,7 @@ return {
       -- remove annoying messages
       handlers = {
         ['language/status'] = function(_, result)
-          vim.print('***')
+          vim.print('Loading jdtls...')
         end,
         ['$/progress'] = function(_, result, ctx)
         end,

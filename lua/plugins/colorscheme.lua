@@ -1,18 +1,19 @@
 return {
-  "shaunsingh/moonlight.nvim",
+  'olivercederborg/poimandres.nvim',
   lazy = false,
   priority = 1000,
   config = function()
-    -- Example config in lua
-    vim.g.moonlight_italic_comments = false
-    vim.g.moonlight_italic_keywords = false
-    vim.g.moonlight_italic_functions = false
-    vim.g.moonlight_italic_variables = false
-    vim.g.moonlight_contrast = true
-    vim.g.moonlight_borders = false
-    vim.g.moonlight_disable_background = true
+    require('poimandres').setup {
+      bold_vert_split = false,          -- use bold vertical separators
+      dim_nc_background = true,        -- dim 'non-current' window backgrounds
+      disable_background = true,       -- disable background
+      disable_float_background = true, -- disable background for floats
+      disable_italics = true,          -- disable italics
+    }
+  end,
 
-    vim.cmd("colorscheme moonlight")
+  -- optionally set the colorscheme within lazy config
+  init = function()
+    vim.cmd("colorscheme poimandres")
   end
 }
-

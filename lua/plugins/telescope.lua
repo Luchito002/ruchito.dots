@@ -37,6 +37,13 @@ return {
   config = function(opts)
     vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = "#27a1b9" })
     vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = "#27a1b9" })
+
+    vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = "#B284BE" })
+    vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { fg = "#B284BE" })
+
+    vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = "#5de4c7" })
+    vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = "#5de4c7" })
+
     vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 
     require('telescope').setup(opts)
@@ -73,7 +80,7 @@ return {
     {
       "<leader>f",
       function()
-        require('telescope.builtin').find_files({hidden=true})
+        require('telescope.builtin').find_files({ hidden = true })
       end,
       desc = "Find hidden files"
     },
