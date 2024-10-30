@@ -44,15 +44,11 @@ return {
         }
       }
     })
-    require("lspconfig").csharp_ls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities
-    })
     require("lspconfig").eslint.setup({
       on_attach = on_attach,
       capabilities = capabilities
     })
-    require("lspconfig").tsserver.setup({
+    require("lspconfig").ts_ls.setup({
       on_attach = on_attach,
       capabilities = capabilities
     })
@@ -60,36 +56,42 @@ return {
       on_attach = on_attach,
       capabilities = capabilities
     })
-    require("lspconfig").biome.setup({
-      on_attach = on_attach,
-      capabilities = capabilities
-    })
     require("lspconfig").tailwindcss.setup({
       on_attach = on_attach,
       capabilities = capabilities
     })
-    require("lspconfig").cssls.setup({
-      on_attach = on_attach,
-      capabilities = capabilities
-    })
 
-    -- For python
-    require("lspconfig").pyright.setup({
-      on_attach = on_attach,
-      capabilities = capabilities
-    })
 
-    -- For java
-    require("lspconfig").jdtls.setup({
-      on_attach = on_attach,
-      -- remove annoying messages
-      handlers = {
-        ['language/status'] = function(_, result)
-          vim.print('Loading jdtls...')
-        end,
-        ['$/progress'] = function(_, result, ctx)
-        end,
-      },
-    })
+    -- require("lspconfig").biome.setup({
+    --   on_attach = on_attach,
+    --   capabilities = capabilities
+    -- })
+    -- require("lspconfig").cssls.setup({
+    --   on_attach = on_attach,
+    --   capabilities = capabilities
+    -- })
+
+    -- require("lspconfig").csharp_ls.setup({
+    --   on_attach = on_attach,
+    --   capabilities = capabilities
+    -- })
+    -- -- For python
+    -- require("lspconfig").pyright.setup({
+    --   on_attach = on_attach,
+    --   capabilities = capabilities
+    -- })
+
+    -- -- For java
+    -- require("lspconfig").jdtls.setup({
+    --   on_attach = on_attach,
+    --   -- remove annoying messages
+    --   handlers = {
+    --     ['language/status'] = function(_, result)
+    --       vim.print('Loading jdtls...')
+    --     end,
+    --     ['$/progress'] = function(_, result, ctx)
+    --     end,
+    --   },
+    -- })
   end
 }

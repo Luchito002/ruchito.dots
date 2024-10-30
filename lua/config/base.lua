@@ -5,6 +5,7 @@ vim.opt.fileencoding = 'utf-8'
 vim.wo.number = true
 vim.opt.relativenumber = true
 vim.o.termguicolors = true
+vim.o.fillchars = 'eob: '
 
 vim.opt.title = true
 vim.opt.autoindent = true
@@ -34,12 +35,15 @@ vim.opt.wildignore:append { '*/node_modules*/' }
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
+-- Line color when splitting windows
+-- vim.cmd('highlight WinSeparator guibg=#4A628A guifg=#7AB2D3')
+vim.cmd('highlight WinSeparator guifg=#7AB2D3')
+
 vim.api.nvim_create_autocmd("InsertLeave", {
-	pattern = '*',
-	command = "set nopaste"
+  pattern = '*',
+  command = "set nopaste"
 })
 
 vim.opt.formatoptions:append { 'r' }
 
 vim.g.mapleader = " "
-

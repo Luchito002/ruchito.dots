@@ -52,6 +52,8 @@ return {
 
   keys = {
     { "<leader><leader>", "<cmd>Telescope find_files<cr>",  desc = "Find Files" },
+    { "<leader>w",        "<cmd>Telescope live_grep<cr>",   desc = "Find Word" },
+    { "<leader>r",        "<cmd>Telescope oldfiles<cr>",    desc = "Recent files" },
     { "<leader>b",        "<cmd>Telescope buffers<cr>",     desc = "Open Buffers" },
     { "<leader>h",        "<cmd>Telescope help_tags<cr>",   desc = "Open Help tags" },
     { "<leader>c",        "<cmd>Telescope colorscheme<cr>", desc = "Select colorscheme" },
