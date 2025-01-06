@@ -11,14 +11,14 @@ return {
       "lua",
       "luadoc",
       "tsx",
+      "cpp",
       "javascript",
       "typescript",
       "html",
       "python",
       "c_sharp",
       "java",
-      "properties",
-      "dart"
+      "prisma"
     },
 
     --Modules

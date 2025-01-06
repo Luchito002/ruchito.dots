@@ -4,6 +4,12 @@ return {
     "williamboman/mason.nvim",
     "folke/neodev.nvim",
   },
+  opts = {
+    ensure_installed = {
+      "clangd"
+    }
+  },
+
   config = function()
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -61,12 +67,35 @@ return {
       capabilities = capabilities
     })
 
+    require("lspconfig").clangd.setup({
+      on_attach = on_attach,
+      capabilities = capabilities
+    })
+
+    require("lspconfig").gradle_ls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities
+    })
+
+    local jsoncapabilities = vim.lsp.protocol.make_client_capabilities()
+    jsoncapabilities.textDocument.completion.completionItem.snippetSupport = true
+
+    require("lspconfig").jsonls.setup({
+      on_attach = on_attach,
+      capabilities = jsoncapabilities
+    })
+
+    require("lspconfig").prismals.setup({
+      on_attach = on_attach,
+      capabilities = jsoncapabilities
+    })
+
+    require("lspconfig").cssls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities
+    })
 
     -- require("lspconfig").biome.setup({
-    --   on_attach = on_attach,
-    --   capabilities = capabilities
-    -- })
-    -- require("lspconfig").cssls.setup({
     --   on_attach = on_attach,
     --   capabilities = capabilities
     -- })
@@ -82,16 +111,8 @@ return {
     -- })
 
     -- -- For java
-    -- require("lspconfig").jdtls.setup({
-    --   on_attach = on_attach,
-    --   -- remove annoying messages
-    --   handlers = {
-    --     ['language/status'] = function(_, result)
-    --       vim.print('Loading jdtls...')
-    --     end,
-    --     ['$/progress'] = function(_, result, ctx)
-    --     end,
-    --   },
-    -- })
+    require("lspconfig").jdtls.setup({
+      on_attach = on_attach,
+    })
   end
 }

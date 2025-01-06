@@ -7,6 +7,20 @@ vim.opt.relativenumber = true
 vim.o.termguicolors = true
 vim.o.fillchars = 'eob: '
 
+vim.o.cursorline = true
+
+-- for not to lose the windows terminal cursor styles
+vim.opt.guicursor = ""
+
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  callback = function()
+    if vim.bo.filetype == "oil" then
+      os.execute(
+      "touch '/mnt/c/Users/luis/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json'")
+    end
+  end,
+})
+
 vim.opt.title = true
 vim.opt.autoindent = true
 vim.opt.hlsearch = true
@@ -46,4 +60,5 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 vim.opt.formatoptions:append { 'r' }
 
+vim.g.mapleader = " "
 vim.g.mapleader = " "
