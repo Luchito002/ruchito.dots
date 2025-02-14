@@ -1,0 +1,5 @@
+require "config.clipboard"
+require "config.base"
+require "config.keymaps"
+require "config.lazy"
+require "config.autocmd"

@@ -1,0 +1,33 @@
+layout {
+  tab name="Java" hide_floating_panes=true {
+    pane name="Spring Boot"
+    floating_panes {
+        pane name="Compilation" {
+            x "10%"
+            y "10%"
+            width "80%"
+            height "80%"
+            command "pwsh.exe"
+        }
+    }
+    pane size=1 borderless=true  {
+        plugin location="zellij:status-bar"
+    }
+  }
+
+
+  tab name="Javascript" hide_floating_panes=true {
+    pane name="Nextjs"
+    floating_panes {
+        pane name="Compilation" {
+            x "10%"
+            y "10%"
+            width "80%"
+            height "80%"
+        }
+    }
+    pane size=1 borderless=true  {
+        plugin location="zellij:status-bar"
+    }
+  }
+}

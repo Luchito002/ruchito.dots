@@ -1,0 +1,63 @@
+# In windows, this file must be in C:/User/AppData/Roaming/alacrity/
+
+# Nightfly
+[colors.bright]
+black = "#7c8f8f"
+blue = "#82aaff"
+cyan = "#7fdbca"
+green = "#21c7a8"
+magenta = "#ae81ff"
+red = "#ff5874"
+white = "#d6deeb"
+yellow = "#ecc48d"
+
+[colors.cursor]
+cursor = "#00D8D8"
+text = "#080808"
+
+[colors.normal]
+black = "#1d3b53"
+blue = "#82aaff"
+cyan = "#7fdbca"
+green = "#a1cd5e"
+magenta = "#c792ea"
+red = "#fc514e"
+white = "#a1aab8"
+yellow = "#e3d18a"
+
+[colors.primary]
+background = "#000000"
+bright_foreground = "#eeeeee"
+foreground = "#bdc1c6"
+
+[colors.selection]
+background = "#b2ceee"
+text = "#080808"
+
+
+[font]
+size = 16
+
+[font.normal]
+family = "IntoneMono Nerd Font"
+
+[window]
+option_as_alt = "Both"
+opacity = 0.9
+decorations = "None"
+startup_mode = "Maximized"
+
+[env]
+TERM = "xterm-256color"
+
+[terminal.shell]
+program="wsl.exe"
+
+[keyboard]
+bindings = [
+{ key = "F11", action = "ToggleMaximized" },
+{ key = "T", mods = "Control|Shift", action = "SpawnNewInstance" },
+]
+
+[mouse]
+hide_when_typing = true
